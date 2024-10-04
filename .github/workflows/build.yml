@@ -1,0 +1,74 @@
+﻿name: 'Build'
+
+env:
+  VERSION: 0.0.0
+  PACKAGE_SUFFIX: '-pre.1'
+  # PACKAGE_SUFFIX: ''
+  ASM_VERSION: 0.0.0
+
+on:
+  push:
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          6.0.x
+          8.0.x
+
+    - name: 'test on ${{ matrix.os }}'
+      run: dotnet test src/Delta.Net.sln -c release
+
+
+  build:
+
+    runs-on: 'ubuntu-latest'
+    name: 'Build NuGet'
+
+    steps:
+    - run: |
+        echo head_ref: ${{ github.head_ref }}
+        echo run id: ${{ github.run_id }}
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          6.0.x
+          8.0.x
+
+    - name: Build Library
+      run: |
+        envsubst < src/Delta.Net/Globals.cs > g.tmp && mv g.tmp src/Delta.Net/Globals.cs
+        cat src/Delta.Net/Globals.cs
+        dotnet build src/Delta.Net.sln -c release /p:Version=${{ env.VERSION }}${{ env.PACKAGE_SUFFIX }} /p:FileVersion=$VERSION /p:AssemblyVersion=$ASM_VERSION
+
+    - name: collect artifacts
+      run: |
+        mkdir artifacts
+        cp src/Delta.Net/bin/Release/*.nupkg artifacts/
+        echo "${{ env.VERSION }}" >> artifacts/version.txt
+        cp docs/release-history.md artifacts/
+
+    - uses: actions/upload-artifact@v3
+      name: upload artifacts
+      with:
+        name: bin
+        path: artifacts/*
+

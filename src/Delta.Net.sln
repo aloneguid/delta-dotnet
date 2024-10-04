@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delta.Net", "Delta.Net\Delta.Net.csproj", "{6C012083-444E-43E9-BD16-64D72AE65A65}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{058C833B-4A48-4EF8-AF50-A8D2C777B216}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+		..\docs\README.md = ..\docs\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delta.Net.Test", "Delta.Net.Test\Delta.Net.Test.csproj", "{3BF1B667-4736-4095-9CBE-BC0E65A4786D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C012083-444E-43E9-BD16-64D72AE65A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C012083-444E-43E9-BD16-64D72AE65A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C012083-444E-43E9-BD16-64D72AE65A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C012083-444E-43E9-BD16-64D72AE65A65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF1B667-4736-4095-9CBE-BC0E65A4786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF1B667-4736-4095-9CBE-BC0E65A4786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF1B667-4736-4095-9CBE-BC0E65A4786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF1B667-4736-4095-9CBE-BC0E65A4786D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC3B1C88-2489-4FCA-AE22-A1B2EC3ACB32}
+	EndGlobalSection
+EndGlobal
