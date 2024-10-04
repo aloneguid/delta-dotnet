@@ -1,11 +1,13 @@
 ﻿using System.Text.Json;
+using Delta.Net.Log.Actions;
 using Stowage;
+using Action = Delta.Net.Log.Actions.Action;
 
 namespace Delta.Net.Log {
     public class DeltaLog {
         private readonly IFileStorage _storage;
         private readonly IOPath _location;
-        private List<IOEntry> _entries;
+        private readonly List<IOEntry> _entries = new List<IOEntry>();
         private readonly List<Action> _actions = new List<Action>();
 
         public DeltaLog(IFileStorage storage, IOPath location) {
@@ -18,9 +20,11 @@ namespace Delta.Net.Log {
 
             foreach(IOEntry entry in _entries) {
                 if(entry.Name.EndsWith(".json")) {
-                    string content = await _storage.ReadText(entry.Path);
+                    string? content = await _storage.ReadText(entry.Path);
+                    if(content == null)
+                        continue;
                     foreach(string jsonLine in content.Split('\n')) {
-                        Dictionary<string, object>? uDoc = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonLine);
+                        Dictionary<string, object?>? uDoc = JsonSerializer.Deserialize<Dictionary<string, object?>>(jsonLine);
                         if(uDoc == null || uDoc.Count != 1 || uDoc.Values.First() is not JsonElement je)
                             throw new ApplicationException("unparseable action: " + jsonLine);
                         _actions.Add(Action.CreateFromJsonObject(uDoc.Keys.First(), je));
@@ -30,7 +34,10 @@ namespace Delta.Net.Log {
         }
 
         public async Task OpenAsync() {
-            _entries = (await _storage.Ls(_location.Combine("_delta_log/"))).ToList();
+            // Delta files are stored as JSON in a directory at the root of the table named _delta_log, and together with checkpoints make up the log of all changes that have occurred to a table.
+            IReadOnlyCollection<IOEntry> entries = await _storage.Ls(_location.Combine("_delta_log/"));
+            _entries.Clear();
+            _entries.AddRange(entries);
 
             await ReadActions();
         }
