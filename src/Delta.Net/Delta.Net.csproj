@@ -8,6 +8,13 @@
         <!-- Sign with a fake no password signature for convenience. Note this is not a proof of anything.-->
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>../fake.snk</AssemblyOriginatorKeyFile>
+        <Authors>aloneguid</Authors>
+        <PackageProjectUrl>https://github.com/aloneguid/delta-dotnet</PackageProjectUrl>
+        <PackageIcon>logo-128x128.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/aloneguid/delta-dotnet</RepositoryUrl>
+        <PackageTags>delta.io</PackageTags>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 
     </PropertyGroup>
 
@@ -21,6 +28,17 @@
 
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\..\docs\logo-128x128.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\..\docs\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
