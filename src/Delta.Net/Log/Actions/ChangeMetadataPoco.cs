@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace Delta.Net.Log.Actions {
-    public class ChangeMetadataPoco {
+    internal class ChangeMetadataPoco {
         /// <summary>
         /// Unique identifier for this table
         /// </summary>

@@ -10,16 +10,17 @@ namespace Delta.Net {
     public class DeltaTable {
         private readonly IFileStorage _storage;
         private readonly IOPath _location;
-        private readonly DeltaLog _log;
 
         private DeltaTable(IFileStorage storage, IOPath location) {
             _storage = storage;
             _location = location;
-            _log = new DeltaLog(storage, location);
+            Log = new DeltaLog(storage, location);
         }
 
+        public DeltaLog Log { get; }
+
         private async Task OpenAsync() {
-            await _log.OpenAsync();
+            await Log.OpenAsync();
         }
 
         public static async Task<DeltaTable> OpenAsync(IFileStorage storage, IOPath location) {

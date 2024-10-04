@@ -1,9 +1,16 @@
 ﻿namespace Delta.Net.Log.Actions {
     public class ChangeMetadataAction : Action {
-        public ChangeMetadataAction(ChangeMetadataPoco data) : base(DeltaAction.Metadata) {
-            Data = data;
+
+        private readonly ChangeMetadataPoco _data;
+
+        internal ChangeMetadataAction(ChangeMetadataPoco data) : base(DeltaAction.Metadata) {
+            _data = data;
+            Id = data.Id;
+            Name = data.Name;
         }
 
-        public ChangeMetadataPoco Data { get; }
+        public Guid Id { get; }
+
+        public string? Name { get; }
     }
 }

@@ -15,6 +15,8 @@ namespace Delta.Net.Log {
             _location = location;
         }
 
+        public IReadOnlyList<Action> Actions => _actions;
+
         private async Task ReadActions() {
             _actions.Clear();
 
@@ -23,7 +25,10 @@ namespace Delta.Net.Log {
                     string? content = await _storage.ReadText(entry.Path);
                     if(content == null)
                         continue;
-                    foreach(string jsonLine in content.Split('\n')) {
+                    foreach(string jsonLineRaw in content.Split('\n')) {
+                        string jsonLine = jsonLineRaw.Trim();
+                        if(string.IsNullOrEmpty(jsonLine))
+                            continue;
                         Dictionary<string, object?>? uDoc = JsonSerializer.Deserialize<Dictionary<string, object?>>(jsonLine);
                         if(uDoc == null || uDoc.Count != 1 || uDoc.Values.First() is not JsonElement je)
                             throw new ApplicationException("unparseable action: " + jsonLine);

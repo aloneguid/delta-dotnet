@@ -1,9 +1,15 @@
 ﻿namespace Delta.Net.Log.Actions {
-    class ProtocolEvolutionAction : Action {
-        public ProtocolEvolutionAction(ProtocolEvolutionActionPoco data) : base(DeltaAction.Protocol) {
+    public class ProtocolEvolutionAction : Action {
+        internal ProtocolEvolutionAction(ProtocolEvolutionActionPoco data) : base(DeltaAction.Protocol) {
             Data = data;
+            MinReaderVersion = data.MinReaderVersion;
+            MinWriterVersion = data.MinWriterVersion;
         }
 
-        public ProtocolEvolutionActionPoco Data { get; }
+        ProtocolEvolutionActionPoco Data { get; }
+
+        public int MinReaderVersion { get; }
+
+        public int MinWriterVersion { get; }
     }
 }
