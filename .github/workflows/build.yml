@@ -33,7 +33,7 @@ jobs:
           8.0.x
 
     - name: 'test on ${{ matrix.os }}'
-      run: dotnet test src/Delta.Net.sln -c release
+      run: dotnet test src/DeltaLake.sln -c release
 
 
   build:
@@ -57,12 +57,12 @@ jobs:
       run: |
         envsubst < src/Delta.Net/Globals.cs > g.tmp && mv g.tmp src/Delta.Net/Globals.cs
         cat src/Delta.Net/Globals.cs
-        dotnet build src/Delta.Net.sln -c release /p:Version=${{ env.VERSION }}${{ env.PACKAGE_SUFFIX }} /p:FileVersion=$VERSION /p:AssemblyVersion=$ASM_VERSION
+        dotnet build src/DeltaLake.sln -c release /p:Version=${{ env.VERSION }}${{ env.PACKAGE_SUFFIX }} /p:FileVersion=$VERSION /p:AssemblyVersion=$ASM_VERSION
 
     - name: collect artifacts
       run: |
         mkdir artifacts
-        cp src/Delta.Net/bin/Release/*nupkg artifacts/
+        cp src/DeltaLake/bin/Release/*nupkg artifacts/
         echo "${{ env.VERSION }}" >> artifacts/version.txt
         cp docs/release-history.md artifacts/
 
