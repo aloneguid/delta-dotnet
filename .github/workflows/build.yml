@@ -55,8 +55,8 @@ jobs:
 
     - name: Build Library
       run: |
-        envsubst < src/Delta.Net/Globals.cs > g.tmp && mv g.tmp src/Delta.Net/Globals.cs
-        cat src/Delta.Net/Globals.cs
+        envsubst < src/DeltaLake/Globals.cs > g.tmp && mv g.tmp src/DeltaLake/Globals.cs
+        cat src/DeltaLake/Globals.cs
         dotnet build src/DeltaLake.sln -c release /p:Version=${{ env.VERSION }}${{ env.PACKAGE_SUFFIX }} /p:FileVersion=$VERSION /p:AssemblyVersion=$ASM_VERSION
 
     - name: collect artifacts

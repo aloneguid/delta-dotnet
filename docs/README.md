@@ -1,4 +1,4 @@
-# Delta.Net
+# Dear Delta Lake
 
 ![](logo.svg)
 
