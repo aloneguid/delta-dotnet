@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -13,8 +13,9 @@
         <PackageIcon>logo-128x128.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/aloneguid/delta-dotnet</RepositoryUrl>
-        <PackageTags>delta.io</PackageTags>
+        <PackageTags>delta.io deltalake</PackageTags>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageId>DearDeltaLake</PackageId>
 
     </PropertyGroup>
 

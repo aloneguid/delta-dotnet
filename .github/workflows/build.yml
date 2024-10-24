@@ -45,7 +45,7 @@ jobs:
     - run: |
         echo head_ref: ${{ github.head_ref }}
         echo run id: ${{ github.run_id }}
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:

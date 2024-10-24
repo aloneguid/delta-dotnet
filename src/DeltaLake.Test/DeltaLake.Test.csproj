@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Delta.Net\Delta.Net.csproj" />
+      <ProjectReference Include="..\DeltaLake\DeltaLake.csproj" />
     </ItemGroup>
 
     <ItemGroup>
